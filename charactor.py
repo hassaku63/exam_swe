@@ -1,9 +1,9 @@
 class Charactor(object):
     def __init__(self, sex, element, job, equipment):
         self.sex = sex
-        self.element = element
-        self.job = job
-        self.equipment = equipment
+        self._element = element
+        self._job = job
+        self._equipment = equipment
         self.attack = 0
         self.defence = 0
 
@@ -11,6 +11,33 @@ class Charactor(object):
         self.base_ability_calculation = BaseAbilityCalculation()
         self.additional_ability_calculation = AdditionalAbilityCalculation()
 
+        self.update_ability()
+
+    @property
+    def element(self):
+        return self._element
+
+    @element.setter
+    def element(self, element):
+        self._element = element
+        self.update_ability()
+
+    @property
+    def job(self):
+        return self._job
+
+    @job.setter
+    def job(self, job):
+        self._job = job
+        self.update_ability()
+
+    @property
+    def equipment(self):
+        return self._equipment
+
+    @equipment.setter
+    def equipment(self, equipment):
+        self._equipment = equipment
         self.update_ability()
 
     @property

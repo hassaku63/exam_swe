@@ -59,6 +59,15 @@ class TestCharactor(TestCase):
         for case in testset:
             self._assert_atk_def(*case)
 
+    def test_update_ability(self):
+        # testset = [["Male", "Wind", "Fighter", "Sword", 60, 40],
+        #            ["Male", "Water", "Martial", "Stick", 45, 35]
+        c = Charactor("Male", "Wind", "Fighter", "Sword")
+        c.element   = "Water"
+        c.job       = "Martial"
+        c.equipment = "Stick"
+        self.assertEqual((c.attack, c.defence), (45, 35))
+
     def _assert_atk_def(self, sex, element, job, equip, attack, defence):
         c = Charactor(sex, element, job, equip)
         self.assertEqual((c.attack, c.defence), (attack, defence))
