@@ -24,6 +24,3 @@ class TestAdditionalAbilityCalculation(TestCase):
 
     def test_defence(self):
         self.assertEqual(self.additional_ability_calculation.defence(self.charactor), 0)
-
-    def test_skill(self):
-        self.assertEqual(self.additional_ability_calculation.skill(self.charactor), "ギガスラッシュ")
