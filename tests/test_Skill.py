@@ -1,5 +1,5 @@
 from unittest import TestCase
-from main import Charactor, Skill
+from charactor import Charactor, Skill
 
 class TestSkill(TestCase):
     def setUp(self):

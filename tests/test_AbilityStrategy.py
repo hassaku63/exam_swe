@@ -1,5 +1,5 @@
 from unittest import TestCase
-from main import Charactor, BaseAbilityCalculation, AdditionalAbilityCalculation
+from charactor import Charactor, BaseAbilityCalculation, AdditionalAbilityCalculation
 
 class TestBaseAbilityCalculation(TestCase):
     def setUp(self):

@@ -4,26 +4,27 @@ class Charactor(object):
         self.Element = element
         self.Job = job
         self.Equipment = equipment
+        self.attack = 0
+        self.defence = 0
 
         self._skill = Skill.get_skill(self)
         self.base_ability_calculation = BaseAbilityCalculation()
         self.additional_ability_calculation = AdditionalAbilityCalculation()
 
-    @property
-    def attack(self):
-        _atk_base       = self.base_ability_calculation.attack(self)
-        _atk_additional = self.additional_ability_calculation.attack(self)
-        return _atk_base + _atk_additional
-
-    @property
-    def defence(self):
-        _def_base       = self.base_ability_calculation.defence(self)
-        _def_additional = self.additional_ability_calculation.defence(self)
-        return _def_base + _def_additional
+        self.update_ability()
 
     @property
     def skill(self):
         return self._skill
+
+    def update_ability(self):
+        self.attack = \
+            self.base_ability_calculation.attack(self)\
+            + self.additional_ability_calculation.attack(self)
+
+        self.defence = \
+            self.base_ability_calculation.defence(self)\
+            + self.additional_ability_calculation.defence(self)
 
 class BaseAbilityStrategy(object):
     def attack(cls, charactor):
