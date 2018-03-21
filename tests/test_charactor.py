@@ -19,7 +19,7 @@ class TestCharactor(TestCase):
         self.assertEqual(self.charactor.defence, 40)
 
     def test_skill(self):
-        self.assertEqual(self.charactor.skill, "ギガスラッシュ")
+        self.assertEqual(self.charactor.skill.name, "ギガスラッシュ")
 
     def test_special_condition(self):
         """
