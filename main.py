@@ -5,6 +5,7 @@ class Charactor(object):
         self.Job = job
         self.Equipment = equipment
 
+        self._skill = Skill.get_skill(self)
         self.base_ability_calculation = BaseAbilityCalculation()
         self.additional_ability_calculation = AdditionalAbilityCalculation()
 
@@ -22,7 +23,7 @@ class Charactor(object):
 
     @property
     def skill(self):
-        return self.additional_ability_calculation.skill(self)
+        return self._skill
 
 class BaseAbilityStrategy(object):
     def attack(cls, charactor):
@@ -31,8 +32,6 @@ class BaseAbilityStrategy(object):
     def defence(cls, charactor):
         raise NotImplementedError(cls.__class__.__name__)
 
-    def skill(cls, charactor):
-        raise NotImplementedError(cls.__class__.__name__)
 
 class BaseAbilityCalculation(BaseAbilityStrategy):
     """
@@ -54,8 +53,8 @@ class BaseAbilityCalculation(BaseAbilityStrategy):
     - 剣(Sword) 攻撃力 +30 防御力 +30
     - 杖(Stick) 攻撃力 +30 防御力 +10
     - グローブ(Glove) 攻撃力 +20 防御力 +20
-
     """
+
     def attack(self, charactor):
         attack = 0
 
@@ -158,36 +157,54 @@ class AdditionalAbilityCalculation(BaseAbilityStrategy):
 
         return defence
 
-    def skill(self, charactor):
+
+class Skill(object):
+    def __init__(self, name):
+        self._name = name
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    @classmethod
+    def get_skill(cls, charactor):
         """
         戦士(Fighter) → スキル: 男の場合は「ギガスラッシュ」、女の場合は「ビッグバン」
         魔法使い(Magician) → スキル: 男の場合は「ベギラマ」、女の場合は「メラミ」
         武道家(Martial) → スキル: 男の場合は「ブースト」、女の場合は「カウンタ」
         """
-        skill = ""
+        skill_name = ""
         if charactor.Sex == "Male":
             if charactor.Job == "Fighter":
-                skill = "ギガスラッシュ"
+                skill_name = "ギガスラッシュ"
             elif charactor.Job == "Magician":
-                skill = "ベギラマ"
+                skill_name = "ベギラマ"
             elif charactor.Job == "Martial":
-                skill = "ブースト"
+                skill_name = "ブースト"
             else:
                 pass
         elif charactor.Sex == "Female":
             if charactor.Job == "Fighter":
-                skill = "ビッグバン"
+                skill_name = "ビッグバン"
             elif charactor.Job == "Magician":
-                skill = "メラミ"
+                skill_name = "メラミ"
             elif charactor.Job == "Martial":
-                skill = "カウンタ"
+                skill_name = "カウンタ"
             else:
                 pass
 
         else:
             pass
 
-        return skill
+        def __str__(self):
+            return self.name
+
+        return Skill(skill_name)
+
 
 if __name__ == "__main__":
     pass
