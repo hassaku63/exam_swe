@@ -7,10 +7,10 @@ class TestCharactor(TestCase):
         self.charactor = Charactor("Male", "Wind", "Fighter", "Sword")
 
     def test_charactor(self):
-        self.assertEqual(self.charactor.Sex, "Male")
-        self.assertEqual(self.charactor.Element, "Wind")
-        self.assertEqual(self.charactor.Job, "Fighter")
-        self.assertEqual(self.charactor.Equipment, "Sword")
+        self.assertEqual(self.charactor.sex, "Male")
+        self.assertEqual(self.charactor.element, "Wind")
+        self.assertEqual(self.charactor.job, "Fighter")
+        self.assertEqual(self.charactor.equipment, "Sword")
 
     def test_attack(self):
         self.assertEqual(self.charactor.attack, 60)

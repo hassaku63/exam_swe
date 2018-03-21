@@ -1,9 +1,9 @@
 class Charactor(object):
     def __init__(self, sex, element, job, equipment):
-        self.Sex = sex
-        self.Element = element
-        self.Job = job
-        self.Equipment = equipment
+        self.sex = sex
+        self.element = element
+        self.job = job
+        self.equipment = equipment
         self.attack = 0
         self.defence = 0
 
@@ -18,6 +18,9 @@ class Charactor(object):
         return self._skill
 
     def update_ability(self):
+        """
+        インスタンスの初期化時とプロパティの更新時に呼び出す
+        """
         self.attack = \
             self.base_ability_calculation.attack(self)\
             + self.additional_ability_calculation.attack(self)
@@ -59,28 +62,28 @@ class BaseAbilityCalculation(BaseAbilityStrategy):
     def attack(self, charactor):
         attack = 0
 
-        if charactor.Sex == "Male":
+        if charactor.sex == "Male":
             attack += 5
 
-        elif charactor.Sex == "Female":
+        elif charactor.sex == "Female":
             attack += 0
 
-        if charactor.Element == "Wind":
+        if charactor.element == "Wind":
             attack += 5
 
-        elif charactor.Element == "Water":
+        elif charactor.element == "Water":
             attack += 10
 
-        elif charactor.Element == "Thunder":
+        elif charactor.element == "Thunder":
             attack += 15
 
-        if charactor.Equipment == "Sword":
+        if charactor.equipment == "Sword":
             attack += 30
 
-        elif charactor.Equipment == "Stick":
+        elif charactor.equipment == "Stick":
             attack += 30
 
-        elif charactor.Equipment == "Glove":
+        elif charactor.equipment == "Glove":
             attack += 20
 
         return attack
@@ -88,28 +91,28 @@ class BaseAbilityCalculation(BaseAbilityStrategy):
     def defence(self, charactor):
         defence = 0
 
-        if charactor.Sex == "Male":
+        if charactor.sex == "Male":
             defence += 0
 
-        elif charactor.Sex == "Female":
+        elif charactor.sex == "Female":
             defence += 5
 
-        if charactor.Element == "Wind":
+        if charactor.element == "Wind":
             defence += 10
 
-        elif charactor.Element == "Water":
+        elif charactor.element == "Water":
             defence += 5
 
-        elif charactor.Element == "Thunder":
+        elif charactor.element == "Thunder":
             defence += 0
 
-        if charactor.Equipment == "Sword":
+        if charactor.equipment == "Sword":
             defence += 30
 
-        elif charactor.Equipment == "Stick":
+        elif charactor.equipment == "Stick":
             defence += 10
 
-        elif charactor.Equipment == "Glove":
+        elif charactor.equipment == "Glove":
             defence += 20
 
         return defence
@@ -127,13 +130,13 @@ class AdditionalAbilityCalculation(BaseAbilityStrategy):
         杖(Stick) 攻撃力 +30 防御力 +10(魔法使いの場合はさらに攻撃力+20)
         """
         attack = 0
-        if charactor.Element == "Wind" and charactor.Job == "Martial":
+        if charactor.element == "Wind" and charactor.job == "Martial":
             attack += 20
 
-        if charactor.Equipment == "Sword" and charactor.Job == "Fighter":
+        if charactor.equipment == "Sword" and charactor.job == "Fighter":
             attack += 20
 
-        if charactor.Equipment == "Stick" and charactor.Job == "Magician":
+        if charactor.equipment == "Stick" and charactor.job == "Magician":
             attack += 20
 
         return attack
@@ -147,13 +150,13 @@ class AdditionalAbilityCalculation(BaseAbilityStrategy):
         """
         defence = 0
 
-        if charactor.Element == "Water" and charactor.Job == "Fighter":
+        if charactor.element == "Water" and charactor.job == "Fighter":
             defence += 10
 
-        if charactor.Element == "Thunder" and charactor.Job == "Magician":
+        if charactor.element == "Thunder" and charactor.job == "Magician":
             defence += 5
 
-        if charactor.Equipment == "Stick" and charactor.Job == "Martial":
+        if charactor.equipment == "Stick" and charactor.job == "Martial":
             defence += 20
 
         return defence
@@ -179,21 +182,21 @@ class Skill(object):
         武道家(Martial) → スキル: 男の場合は「ブースト」、女の場合は「カウンタ」
         """
         skill_name = ""
-        if charactor.Sex == "Male":
-            if charactor.Job == "Fighter":
+        if charactor.sex == "Male":
+            if charactor.job == "Fighter":
                 skill_name = "ギガスラッシュ"
-            elif charactor.Job == "Magician":
+            elif charactor.job == "Magician":
                 skill_name = "ベギラマ"
-            elif charactor.Job == "Martial":
+            elif charactor.job == "Martial":
                 skill_name = "ブースト"
             else:
                 pass
-        elif charactor.Sex == "Female":
-            if charactor.Job == "Fighter":
+        elif charactor.sex == "Female":
+            if charactor.job == "Fighter":
                 skill_name = "ビッグバン"
-            elif charactor.Job == "Magician":
+            elif charactor.job == "Magician":
                 skill_name = "メラミ"
-            elif charactor.Job == "Martial":
+            elif charactor.job == "Martial":
                 skill_name = "カウンタ"
             else:
                 pass
