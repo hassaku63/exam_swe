@@ -12,8 +12,6 @@ class TestBaseAbilityCalculation(TestCase):
     def test_defence(self):
         self.assertEqual(self.base_ability_calculation.defence(self.charactor), 40)
 
-    def test_skill(self):
-        pass
 
 
 class TestAdditionalAbilityCalculation(TestCase):
